@@ -1,0 +1,52 @@
+<h1>PicReader#home</h1>
+
+<h2>Rmagick IPTC info</h2>
+<p><%= @rmagick.iptc_profile %></p>
+
+<h2>Mini_Exiftool IPTC info</h2>
+<% if @mini_exiftool_value then %>
+  <% @mini_exiftool.tags.sort.each do |tag| %>
+    <p><%= tag.ljust(28)+": " + @mini_exiftool[tag].to_s %></p>
+  <% end %>
+<% else %>
+  <p><%= " File could not be read with Mini_exiftool: "+ @Photo_Select  %></p>
+<% end %>
+
+
+<p></p>
+<h2>XMP IPTC info</h2>
+  <% if @xmp_value then %>
+    <% @ErrorAttribute = false %>
+  	<% @xmp.namespaces.each do |namespace_name| %>
+  		<% namespace = @xmp.send(namespace_name) %>
+  		<% namespace.attributes.each do |attr| %>
+      <% case "#{namespace_name}.#{attr}" %>
+      <% when "xmp.Rating", "MicrosoftPhoto.Rating", "photoshop.Headline", "exif.Flash" %>
+        <% @ErrorAttribute = true %>
+      <% end %>
+
+  			<% if @ErrorAttribute  %>
+  				<p> <%= "#{namespace_name}.#{attr}: ERROR   " %></p>
+          <% @ErrorAttribute                                                          =    false %>
+  			<% else %>
+    			<p> <%= "#{namespace_name}.#{attr}: " + namespace.send(attr).inspect   %>  </p>
+    		<% end %>
+  		<% end %>
+	 <% end %>
+  <% else %>
+    <p><%= " File could not be read with XMP: "+ @Photo_Select  %></p>
+  <% end %>
+
+<h2> Exif info </h2>
+	<% if @exifr.exif? then 
+        puts "EXIF information".center(72)
+        puts "=" * 72
+        h = @exifr.exif.to_hash
+        h.each_pair do |k,v| %>
+            <p> <%= "#{k.to_s.rjust(30)} : #{v}" %> </p>
+        <% end
+    else
+        puts "No EXIF information in this image"
+    end %>
+
+

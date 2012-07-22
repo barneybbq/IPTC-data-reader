@@ -1,0 +1,27 @@
+# require 'xmp'
+# require 'exifr'
+# require 'open-uri'
+
+# if @exif_info.exif? then
+ #        puts "EXIF information".center(72)
+ #        puts "=" * 72
+ #        h = @exif_info.exif.to_hash
+ #        h.each_pair do |k,v|
+ #            puts "#{k.to_s.rjust(30)} : #{v}"
+ #        end
+ #    else
+ #        puts "No EXIF information in this image"
+ #    end
+	# xmp = XMP.parse(img)
+ #  	xmp.dc.subject #=> ["something interesting"]
+ #  	xmp.namespaces.each do |namespace_name|
+ #  		namespace = xmp.send(namespace_name)
+ #  		namespace.attributes.each do |attr|
+ #    		puts "#{namespace_name}.#{attr}: " + namespace.send(attr).inspect
+ #  		end
+	# end
+
+	# Special backup
+	#    <p> <%= "#{namespace_name}.#{attr}: " + namespace.send(attr).inspect %> </p>
++ namespace.send(attr).inspect
+        <%= "Error detected " + @ErrorAttribute.to_s %>

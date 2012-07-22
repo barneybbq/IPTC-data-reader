@@ -1,0 +1,11 @@
+ 	<p> <%= @xmp.MicrosoftPhoto.LastKeywordXMP %> </P>
+  	<% @xmp.namespaces.each do |namespace_name| %>
+  		<% namespace = @xmp.send(namespace_name) %>
+  		<% namespace.attributes.each do |attr| %>
+  			<% if "#{namespace_name}.#{attr}" = "xmp.Rating" %>
+  				<p> <%= "#{namespace_name}.#{attr}: " %></p>
+  				<% else %>
+    			<p> <%= "#{namespace_name}.#{attr}: " + namespace.send(attr).inspect %> </p>
+    		<% end %>
+  		<% end %>
+	<% end %>

@@ -1,0 +1,2 @@
+module PicReaderHelper
+end

@@ -1,4 +1,6 @@
 ExifReader::Application.routes.draw do
+  get "pic_reader/home"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
